@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONOGO_ATLAS_USER": "mongodb-user",
+    "MONGO_ATLAS_PW": "mongodb-pw",
+    "JWT_KEY": "pick_a_long_random_key_for_json_web_token"
+  }
+}
