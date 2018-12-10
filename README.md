@@ -12,11 +12,11 @@ This project uses
 # Setup
 ## Setup Backend
 1. Install node packages for backend in `./backend/` using `npm i`.
-2. Configure MongoDB connection details in `./nodemon.json`. If using a pre-existing MongoDB Atlas instance, just change the DB name on the end of the URL to a new one. Mongoose will handle creation of new collections, etc. automatically when referencing them.
+2. Configure MongoDB connection details in `./nodemon.json`. Changing the DB name will auto-create it if it doesn't exist. Mongoose will handle creation of new collections, etc. automatically when referencing them.
 3. Set a unique JSON Web Token key in `./nodemon.json`.
 * Start the backend using `npm run start:server`.
-* Nodemon is used to monitor for changes and auto-restart the server.
-* The backend uses port 3000 by default.
+* Nodemon is used to monitor for changes and auto-restart the server (it also handles environmental variables).
+* The backend uses port 3000 by default, but can be changed using the `--port=PORT#` flag.
 
 ## Setup Frontend
 1. Angular will use a Node backend will be at http://localhost:3000/api when running in dev, but can be modified in `./src/environments/environment.ts`.
