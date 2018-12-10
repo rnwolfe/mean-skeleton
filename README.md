@@ -25,6 +25,21 @@ This project uses
 * Frontend will run on http://localhost:4200 by default.
 
 # Building Off of the Skeleton
+## Backend Authentication
+The skeleton example backend API endpoints require authentication for any update/create operations. This means that you must be logged in and therefore have an account. The `checkAuth` middleware can be added on the route to require authentication.
+
+## Frontend Authentication
+The frontend automatically handles the addition of the `Authorization: Bearer [token]` using an HTTP Interceptor. The interceptor can be found in `./src/app/auth/auth-interceptor.ts`. This token is then used in an AuthGuard that checks, using `auth.service.ts`, if thte user is authenticated to enforce authentication for frontend routes, as well. This AuthGuard is applied on the frontend routes using `CanActivate` on the route:
+
+```typescript
+const routes: Routes = [
+  { path: '', component: PostListComponent },
+  { path: 'create', component: PostCreateComponent, canActivate: [AuthGuard] },
+  { path: 'edit/:postId', component: PostCreateComponent, canActivate: [AuthGuard] },
+  { path: 'auth', loadChildren: './auth/auth.module#AuthModule'}
+];
+```
+
 ## Add New API Routes
 The general structure for routes uses
 
