@@ -3,13 +3,12 @@ const express = require('express');
 const PostController = require('../controllers/posts');
 
 const checkAuth = require('../middleware/check-auth');
-const imageUpload = require('../middleware/image-upload');
 
 const router = express.Router();
 
-router.post('', checkAuth, imageUpload, PostController.createPost);
+router.post('', checkAuth, PostController.createPost);
 
-router.put('/:id', checkAuth, imageUpload, PostController.updatePost);
+router.put('/:id', checkAuth, PostController.updatePost);
 
 router.get('', PostController.getPosts);
 

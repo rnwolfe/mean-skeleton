@@ -4,7 +4,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
-import { mimeType } from './mime-type.validator';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 
@@ -19,7 +18,6 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   post: Post;
   isLoading = false;
   form: FormGroup;
-  imagePreview: string;
   private mode = 'create';
   private postId: string;
   private authStatusSub: Subscription;
@@ -38,10 +36,6 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       }),
       'content': new FormControl(null, {
         validators: [Validators.required]
-      }),
-      'image': new FormControl(null, {
-        validators: [Validators.required],
-        asyncValidators: [mimeType]
       })
     });
 
@@ -57,13 +51,11 @@ export class PostCreateComponent implements OnInit, OnDestroy {
               id: postData.post._id,
               title: postData.post.title,
               content: postData.post.content,
-              imagePath: postData.post.imagePath,
               creator: postData.post.creator
             };
             this.form.setValue({
               'title': this.post.title,
               'content': this.post.content,
-              'image': this.post.imagePath
             });
           });
       } else {
@@ -73,30 +65,18 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     });
   }
 
-  onImagePicked(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.form.patchValue({ 'image': file });
-    this.form.get('image').updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
   onSavePost() {
     if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === 'create') {
-      this.postsService.addPost(this.form.value.title, this.form.value.content, this.form.value.image);
+      this.postsService.addPost(this.form.value.title, this.form.value.content);
     } else {
       this.postsService.updatePost(
         this.post.id,
         this.form.value.title,
         this.form.value.content,
-        this.form.value.image
       );
     }
     this.form.reset();

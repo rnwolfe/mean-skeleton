@@ -7,8 +7,7 @@ const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 
 const app = express();
-
-mongoose.connect('mongodb+srv://' + process.env.MONGO_ATLAS_USER + ':' + process.env.MONGO_ATLAS_PW + '@cluster0-5kqfi.mongodb.net/node-angular?retryWrites=true')
+mongoose.connect('mongodb+srv://' + process.env.MONGO_ATLAS_USER + ':' + process.env.MONGO_ATLAS_PW + '@cluster0-5kqfi.mongodb.net/' + process.env.MONGO_ATLAS_DB + '?retryWrites=true')
   .then(() => {
     console.log('Connected to database!')
   })
