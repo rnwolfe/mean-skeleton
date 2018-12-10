@@ -6,10 +6,16 @@ This a skeleton for a MEAN stack application to help quick start projects in the
 This project uses
 * MongoDB (via Atlas)
 * ExpressJS
-* Angular
+* Angular (w/ Angular Material Design)
 * Node.js (w/ nodemon)
 
 # Setup
+Start with (obviously) cloning this repository.
+
+```git
+git clone https://github.com/rnwolfe/mean-skeleton.git
+```
+
 ## Setup Backend
 1. Install node packages for backend in `./backend/` using `npm i`.
 2. Configure MongoDB connection details in `./nodemon.json`. Changing the DB name will auto-create it if it doesn't exist. Mongoose will handle creation of new collections, etc. automatically when referencing them.
