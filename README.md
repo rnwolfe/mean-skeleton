@@ -49,7 +49,7 @@ The general structure for routes uses
 
 Logic should be in `./backend/controllers/[name].js`.
 
-```python
+```node
 const Post = require('../models/post');
 
 exports.deletePost = (req, res, next) => {
@@ -69,7 +69,7 @@ Post.deleteOne({ _id: req.params.id, creator: req.userData.userId })
 ```
 The routes file in `./backend/routes` has the specific gets, puts, posts, deletes, etc. This file should not contain logic, but the specific routes calling specific functions. Authentication can be required by adding the `checkAuth` middleware (after importing) to the route.
 
-```python
+```node
 const express = require('express');
 const PostController = require('../controllers/posts');
 const checkAuth = require('../middleware/check-auth');
@@ -83,7 +83,7 @@ module.exports = router;
 
 Top level is in `./backend/app.js` specifying that all `/api/[name]` URIs should use the router model in `./backend/routes/`.
 
-```python
+```node
 const postsRoutes = require('./routes/posts');
 app.use('/api/posts', postsRoutes);
 ```
